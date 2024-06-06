@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Users
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Usuarios</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-list>
+      <ion-item *ngFor="let usuario of usuarios" (click)="editUser(usuario)">
+        <ion-label>
+          <h2>{{ usuario.nombreUsuario }} {{ usuario.apellidoUsuario }}</h2>
+          <p>Rol: {{ usuario.rol }}</p>
+        </ion-label>
+        <div>
+          <ion-card slot="end">edit</ion-card>
+          <ion-card slot="end">delete</ion-card>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

@@ -28,6 +28,17 @@
 
 #content_buttons{
   width: 10%;
+  height: 100%;
   display: flex;
   justify-content: space-evenly;
+  ion-button{
+    width: 40%;
+    font-size: 110%;
+  }
+}
+    
+#button_header{
+  font-size: 110%;
+  margin-right: 3%;
+
 }

@@ -1,7 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title> Users </ion-title>
-    <ion-button slot="end" (click)="createUser()"> crear usuario</ion-button>
+    <ion-button slot="end" (click)="createUser()" id="button_header"> 
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -20,8 +22,12 @@
           <p>Rol: {{ usuario.rol }}</p>
         </ion-label>
         <div id="content_buttons">
-          <ion-button slot="end" (click)="editUser(usuario)">Edit</ion-button>
-          <ion-button slot="end" (click)="deleteUser(usuario)">Delete</ion-button>
+          <ion-button slot="end" (click)="editUser(usuario)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button slot="end" (click)="deleteUser(usuario)" *ngIf="usuario.rol !== 'super_admin'">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
         </div>
       </ion-item>
     </ion-list>

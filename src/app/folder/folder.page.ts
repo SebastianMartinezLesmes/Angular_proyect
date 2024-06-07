@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-folder',
@@ -18,7 +19,10 @@ export class FolderPage implements OnInit {
   action: string = '';
   textButton = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private loadingController: LoadingController,
+  ) {}
 
   ngOnInit() {
     const storedUser = localStorage.getItem('selectedUser');
@@ -32,6 +36,17 @@ export class FolderPage implements OnInit {
     }
   }
 
+  async presentLoading(message: string) {
+    const loading = await this.loadingController.create({
+      message,
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
+  }
+
   back() {
     localStorage.removeItem('selectedUser');
     this.router.navigate(['/home']);
@@ -39,8 +54,10 @@ export class FolderPage implements OnInit {
 
   async event() {
     if (this.action === 'Edit User info') {
+      await this.presentLoading('Editing user information...');
       await this.editUser();
     } else {
+      await this.presentLoading('Creating user...');
       await this.createUser();
     }
   }

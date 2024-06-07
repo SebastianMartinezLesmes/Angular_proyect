@@ -30,9 +30,34 @@ export class HomePage implements OnInit {
     }
   }
 
-  editUser( usuario: any ){
-    this.router.navigate(['/folder'], { state: { usuario } });
+  createUser(){
+    localStorage.removeItem('selectedUser');
+    this.router.navigate(['/folder']);
   }
 
-  deleteUser(){}
+  editUser(usuario: any) {
+    localStorage.setItem('selectedUser', JSON.stringify(usuario));
+    this.router.navigate(['/folder']);
+    console.log(usuario);
+  }
+
+  async deleteUser(usuario : any) {
+    console.log(usuario)
+    try {
+      const response = await fetch(`http://localhost:5000/userDelete/${usuario.idUsuario}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.ok) {
+        // console.log(`User ${usuario.} deleted`);
+        this.fetchUsuarios(); // Refresh the list of users
+      } else {
+        console.error('Error deleting user:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error in deleteUser:', error);
+    }
+  }
 }

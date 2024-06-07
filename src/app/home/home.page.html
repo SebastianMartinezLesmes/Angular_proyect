@@ -1,8 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Users
-    </ion-title>
+    <ion-title> Users </ion-title>
+    <ion-button slot="end" (click)="createUser()"> crear usuario</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -15,14 +14,14 @@
 
   <div id="container">
     <ion-list>
-      <ion-item *ngFor="let usuario of usuarios" (click)="editUser(usuario)">
+      <ion-item *ngFor="let usuario of usuarios">
         <ion-label>
           <h2>{{ usuario.nombreUsuario }} {{ usuario.apellidoUsuario }}</h2>
           <p>Rol: {{ usuario.rol }}</p>
         </ion-label>
-        <div>
-          <ion-card slot="end">edit</ion-card>
-          <ion-card slot="end">delete</ion-card>
+        <div id="content_buttons">
+          <ion-button slot="end" (click)="editUser(usuario)">Edit</ion-button>
+          <ion-button slot="end" (click)="deleteUser(usuario)">Delete</ion-button>
         </div>
       </ion-item>
     </ion-list>

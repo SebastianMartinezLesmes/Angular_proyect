@@ -1,9 +1,104 @@
-header{
-    background: rgb(238, 180, 180);
-    width: 100%;
-    height: auto;
+.home-container {
+  height: 100vh;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  text-align: center;
 
+  .app-header {
+    background: rgba(233, 9, 9, 0.8); // color rosado semi-transparente
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: fadeSlideDown 1s ease;
+      display: inline-block;
+      transition: transform 0.8s ease;
+
+      &:active {
+        transform: rotate(360deg);
+      }
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+
+      button {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        background: rgba(255,255,255,0.2);
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(255,255,255,0.5);
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      animation: fadeSlideUp 1s ease;
+    }
+
+    p {
+      max-width: 600px;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+
+    button {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #4facfe;
+      background: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: #f0f0f0;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      }
+    }
+  }
+}
+
+/* Animaciones */
+@keyframes fadeSlideDown {
+  0% { opacity: 0; transform: translateY(-50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
 }

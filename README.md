@@ -40,6 +40,9 @@ Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
    ```bash
    ng serve
    ```
+   ```bash
+   npm start
+   ```
 ---
 
 ## Comandos útiles

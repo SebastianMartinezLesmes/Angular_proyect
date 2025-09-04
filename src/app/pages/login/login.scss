@@ -4,30 +4,54 @@
   align-items: center;
   justify-content: center;
 
-  height: 97vh; // ocupar toda la pantalla
+  height: 100vh;
+  width: 100%;
+  position: relative; // necesario para las olas
+  overflow: hidden;
   background: linear-gradient(to right, #4facfe, #00f2fe);
   font-family: Arial, sans-serif;
 
-    h1{
-        color: #fff;
-        margin-bottom: 2rem;
-        font-size: 2.5rem;
-        display: inline-block; // necesario para la rotación
-        transition: transform 0.8s ease; // transición suave
+  /* Olas animadas */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 500%;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 100% 50%;
+    animation: wave 8s linear infinite;
+  }
 
-        &:active {
-            transform: rotate(360deg);
-        }
+  &::after {
+    background: rgba(255, 255, 255, 0.6);
+    animation: wave 12s linear infinite reverse;
+    bottom: -30px;
+  }
+
+  h1 {
+    color: #fff;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    display: inline-block;
+    transition: transform 0.8s ease;
+
+    &:active {
+      transform: rotate(360deg);
     }
+  }
 
   form {
     display: flex;
     flex-direction: column;
     width: 300px;
     padding: 2rem;
-    background: #ffffffdd; // blanco semi-transparente
+    background: #ffffffdd;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 2; // mantener el formulario por encima de las olas
 
     .form-group {
       display: flex;
@@ -71,7 +95,13 @@
   }
 }
 
-/* Animaciones */
+/* Animación de olas */
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Animaciones adicionales */
 @keyframes fadeSlideDown {
   0% { opacity: 0; transform: translateY(-50px); }
   100% { opacity: 1; transform: translateY(0); }

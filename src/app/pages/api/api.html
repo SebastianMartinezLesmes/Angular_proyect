@@ -1,5 +1,38 @@
-<p>api works!</p>
 <header class="app-header">
-  <button (click)="routerTo('/home')">Home</button>
-  <button (click)="routerTo('/login')">out</button>
+  <div>
+    <button (click)="routerTo('/home')">🏠 Home</button>
+    <h2 class="page-title">API - Perros 🐶</h2>
+    <button (click)="routerTo('/login')">🚪 Out</button>
+  </div>
+
+  <div>
+    <button (click)="getDogs()">🔄 Recargar</button>
+    <input 
+      type="text" 
+      placeholder="Buscar raza..." 
+      [(ngModel)]="searchTerm" 
+      (input)="filterDogs()"
+    >
+  </div>
 </header>
+
+<div class="dogs-container">
+  @for (dog of dogsFilter; track dog.breed) {
+    <div class="dog-card">
+      <h3>{{ dog.breed }}</h3>
+
+      @if (dog.image) {
+        <img [src]="dog.image" alt="{{ dog.breed }}">
+      }
+
+      @if (dog.subBreeds.length > 0) {
+        <h4>Subrazas</h4>
+        <ul>
+          @for (sub of dog.subBreeds; track sub) {
+            <li>{{ sub }}</li>
+          }
+        </ul>
+      }
+    </div>
+  }
+</div>

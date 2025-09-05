@@ -166,8 +166,8 @@ header {
 
 .modal-right {
   flex: 1;
-  display: flex;                /* lo convierte en flex container */
-  flex-direction: column;       /* apila verticalmente */
+  display: flex; 
+  flex-direction: column; 
   justify-content: space-evenly;
 
   h2 {

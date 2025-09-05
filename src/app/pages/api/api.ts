@@ -16,10 +16,15 @@ interface Pet {
   imports: [FormsModule], // 👈 habilitamos ngModel
 })
 export class ApiComponent implements OnInit {
+
   constructor(
     private router: Router,
     private http: HttpClient,
   ) {}
+
+    // 👇 nuevo: perro seleccionado y control de modal
+  selectedDog: Pet | null = null;
+  showModal: boolean = false;
 
   dogs: Pet[] = [];
   dogsFilter: Pet[] = [];
@@ -79,5 +84,15 @@ export class ApiComponent implements OnInit {
       dog.breed.toLowerCase().includes(term) ||
       dog.subBreeds.some(sub => sub.toLowerCase().includes(term))
     );
+  }
+
+  openDogModal(dog: Pet) {
+    this.selectedDog = dog;
+    this.showModal = true;
+  }
+
+  closeDogModal() {
+    this.showModal = false;
+    this.selectedDog = null;
   }
 }

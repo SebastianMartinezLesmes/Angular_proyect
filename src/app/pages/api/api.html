@@ -16,22 +16,45 @@
   </div>
 </header>
 
+<!-- 🌟 Modal emergente -->
+@if (showModal && selectedDog) {
+  <div class="modal-overlay" (click)="closeDogModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeDogModal()">✖</button>
+
+      <div class="modal-body">
+        <!-- Izquierda: imagen -->
+        <div class="modal-left">
+          <img [src]="selectedDog.image" [alt]="selectedDog.breed">
+        </div>
+
+        <!-- Derecha: info -->
+        <div class="modal-right">
+          <h2>{{ selectedDog.breed }}</h2>
+
+          @if (selectedDog.subBreeds.length > 0) {
+            <h3>Subrazas</h3>
+            <ul>
+              @for (sub of selectedDog.subBreeds; track sub) {
+                <li>{{ sub }}</li>
+              }
+            </ul>
+          } @else {
+            <p><em>No tiene subrazas registradas.</em></p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
 <div class="dogs-container">
   @for (dog of dogsFilter; track dog.breed) {
-    <div class="dog-card">
+    <div class="dog-card" (click)="openDogModal(dog)">
       <h3>{{ dog.breed }}</h3>
 
       @if (dog.image) {
         <img [src]="dog.image" alt="{{ dog.breed }}">
-      }
-
-      @if (dog.subBreeds.length > 0) {
-        <h4>Subrazas</h4>
-        <ul>
-          @for (sub of dog.subBreeds; track sub) {
-            <li>{{ sub }}</li>
-          }
-        </ul>
       }
     </div>
   }

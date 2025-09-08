@@ -12,28 +12,71 @@ export class HomeComponent {
 
   constructor(private router: Router) {}
 
-  listOfThings = {
-    log:"login",
-    api:"api",
-  }
+  listOfThings = [
+    { label: 'API', path: '/api' },
+    { label: 'Time Line', path: '/time_line' },
+    { label: 'Logout', path: '/login' },
+  ];
 
+  ngOnInit() {
+    this.hellow();
+  }
+  
   routerTo(path: string) {
     this.router.navigate([path]);
   }
 
-  window() {
-    Swal.fire({
-      title: '🚀 ¡Bienvenido!',
-      text: 'Has hecho clic en Get Started',
-      icon: 'success',
-      background: '#f0f9ff',        // fondo personalizado
-      color: '#333',                // color de texto principal
-      confirmButtonText: 'Continuar',
-      confirmButtonColor: '#4facfe', // color botón
-      width: '400px',               // ancho de la ventana
-      padding: '2em',               // padding interno
-      backdrop: `rgba(0,0,123,0.4) url("https://sweetalert2.github.io/images/nyan-cat.gif") left top no-repeat`
-    });
+  hellow(){
+    const storedUser = localStorage.getItem('loggedUser');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+
+      Swal.fire({
+        title: `🎉 Bienvenido ${user.user}!`,
+        text: `Tu rol es: ${user.rol}`,
+        icon: 'success',
+        background: '#f0f9ff',
+        color: '#333',
+        confirmButtonText: 'Continuar',
+        confirmButtonColor: '#4facfe',
+        width: '400px',
+        padding: '2em',
+        backdrop: `
+          rgba(0,0,123,0.4)
+          url("https://sweetalert2.github.io/images/nyan-cat.gif")
+          left top
+          no-repeat
+        `
+      });
+    }
   }
 
+  window() {
+    const storedUser = localStorage.getItem('loggedUser');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+
+      Swal.fire({
+        title: `🙋‍♂️ Eres:`,
+        html: `
+          <p><b>Nombre de Usuario:</b> ${user.user}</p>
+          <p><b>Rol:</b> ${user.rol}</p>
+        `,
+        icon: 'info',
+        background: '#fff',
+        color: '#333',
+        confirmButtonText: 'Cerrar',
+        confirmButtonColor: '#3085d6',
+        width: '400px',
+        padding: '1.5em',
+      });
+    } else {
+      Swal.fire({
+        title: '⚠️ No hay sesión activa',
+        text: 'Por favor inicia sesión de nuevo.',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      });
+    }
+  }
 }

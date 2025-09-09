@@ -1,22 +1,34 @@
 <header class="app-header">
-    <h2 class="page-title">📜 Time Line</h2>
+    <h2 class="page-title">Time Line</h2>
+    <ul>
+      @for (item of listOfThings; track $index) {
+          <li><button (click)="routerTo(item.path)">{{ item.label }}</button></li>
+      }
+    </ul>
 </header>
 
 <main class="timeline-layout">
   <aside class="sidebar">
-    <ul>
-        @for (item of listOfThings; track $index) {
-            <li><button (click)="routerTo(item.path)">{{ item.label }}</button></li>
-        }
-    </ul>
+    @for (evento of eventos; track $index) {
+      <button>{{ evento.titulo }}</button>
+    }
   </aside>
 
   <!-- Ventana principal para mostrar la línea de tiempo -->
   <section class="timeline-window">
-    <h3>Tu Línea de Tiempo</h3>
-    <div class="timeline-box">
-      <!-- Aquí puedes renderizar el timeline dinámico -->
-      <p>⚡ Aquí se visualizará la línea de tiempo</p>
-    </div>
+
+      <p-timeline [value]="eventos" align="alternate" styleClass="customized-timeline">
+        
+        <!-- Solo dejamos el contenido -->
+        <ng-template pTemplate="content" let-evento>
+          <p-card>
+            <h4>{{ evento.titulo }}</h4>
+            <p>{{ evento.descripcion }}</p>
+            <p>{{ evento.fecha }}</p>
+          </p-card>
+        </ng-template>
+
+      </p-timeline>
+
   </section>
 </main>

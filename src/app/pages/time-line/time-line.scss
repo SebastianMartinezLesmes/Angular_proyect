@@ -1,30 +1,70 @@
-/* 🎨 Paleta */
-$primary: #0077b6;   
-$secondary: #00b4d8; 
-$accent: #ff7b54;    
-$bg-light: #f9fafb;  
-$text-dark: #2c3e50; 
-$text-gray: #6c757d; 
+/* 🎨 Nueva Paleta (más moderna y vibrante) */
+$primary: #1d3557;    // Azul marino profundo
+$secondary: #457b9d;  // Azul intermedio
+$accent: #e63946;     // Rojo coral elegante
+$bg-light: #f1faee;   // Fondo claro suave
+$text-dark: #1d1d1d;  
+$text-gray: #6c757d;  
 
-header {
-  background: linear-gradient(135deg, $primary, $secondary);
-  padding: 0.8rem 1.2rem;
+/* ---------------- HEADER ---------------- */
+header.app-header {
+  background: linear-gradient(120deg, $primary, $secondary);
+  padding: 1rem 2rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  border-bottom: 2px solid rgba(0,0,0,0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.08);
   color: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 
-  h2 {
-    font-size: 1.4rem;
-    font-weight: bold;
+  /* Título */
+  .page-title {
+    font-size: 1.6rem;
+    font-weight: 700;
     letter-spacing: 1px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    /* Emoji */
+    &::before {
+      content: "📜";
+      font-size: 1.4rem;
+    }
+  }
+
+  /* Menú */
+  ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+
+    li {
+      button {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        color: white;
+        font-weight: 600;
+        border-radius: 20px;
+        padding: 0.4rem 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: white;
+          color: $primary;
+          transform: translateY(-2px);
+          box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+      }
+    }
   }
 }
 
-/* Layout principal */
+/* ---------------- LAYOUT ---------------- */
 .timeline-layout {
   display: flex;
   height: calc(100vh - 80px); /* resta header */
@@ -33,53 +73,77 @@ header {
 
 /* Sidebar */
 .sidebar {
-  width: 200px;
+  width: 220px;
   background: lighten($primary, 40%);
   padding: 1rem;
   border-right: 2px solid rgba(0,0,0,0.1);
+  overflow-y: auto;
+  overflow-x: hidden;
 
-  ul {
-    list-style: none;
-    padding: 0;
+  /* 👇 Hack para poner la barra de scroll a la izquierda */
+  direction: rtl; /* Mueve la scrollbar a la izquierda */
+  scrollbar-gutter: stable both-edges;
 
-    li {
-      margin: 0.5rem 0;
+  /* Ahora reparamos la alineación de los hijos */
+  * {
+    direction: ltr; /* Restaurar dirección normal en el contenido */
+    text-align: left;
+  }
 
-      button {
-        width: 100%;
-        background: $secondary;
-        color: white;
-        font-weight: 600;
-        border: none;
-        border-radius: 6px;
-        padding: 0.5rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
+  button {
+    margin: 0.5rem 0;
+    width: 100%;
+    background: $secondary;
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
-        &:hover {
-          background: darken($secondary, 10%);
-        }
-      }
+    &:hover {
+      background: darken($secondary, 10%);
+      transform: translateX(3px);
     }
   }
 }
 
-/* Ventana principal */
+/* ---------------- VENTANA PRINCIPAL ---------------- */
 .timeline-window {
   flex: 1;
   padding: 2rem;
+}
 
-  h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: $text-dark;
+/* ---------------- PRIMENG TIMELINE ---------------- */
+::ng-deep .customized-timeline {
+  /* Marcadores */
+  .p-timeline-event-marker {
+    background: $accent !important; 
+    border: 2px solid white;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba($accent, 0.5);
+    z-index: 2; 
   }
 
-  .timeline-box {
-    background: white;
+  /* Línea central */
+  .p-timeline-event-connector {
+    background-color: $secondary !important; 
+    width: 4px; 
+    margin: 0 auto; 
+    border-radius: 2px;
+  }
+
+  /* Caja de contenido */
+  .p-timeline-event-content {
+    background: white;   /* color base */
     border-radius: 12px;
     padding: 1.5rem;
-    min-height: 300px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    min-height: 150px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.486);
+    font-size: 0.95rem;
+    margin: 2%;
   }
 }

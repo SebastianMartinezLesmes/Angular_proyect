@@ -1,8 +1,8 @@
 /* 🎨 Nueva Paleta (más moderna y vibrante) */
-$primary: #1d3557;    // Azul marino profundo
-$secondary: #457b9d;  // Azul intermedio
-$accent: #e63946;     // Rojo coral elegante
-$bg-light: #f1faee;   // Fondo claro suave
+$primary: #1d3557;   
+$secondary: #457b9d;  
+$accent: #e63946;     
+$bg-light: #f1faee;   
 $text-dark: #1d1d1d;  
 $text-gray: #6c757d;  
 
@@ -67,7 +67,7 @@ header.app-header {
 /* ---------------- LAYOUT ---------------- */
 .timeline-layout {
   display: flex;
-  height: calc(100vh - 80px); /* resta header */
+  height: calc(100vh - 85px); /* resta header */
   background: $bg-light;
 }
 
@@ -80,11 +80,8 @@ header.app-header {
   overflow-y: auto;
   overflow-x: hidden;
 
-  /* 👇 Hack para poner la barra de scroll a la izquierda */
   direction: rtl; /* Mueve la scrollbar a la izquierda */
   scrollbar-gutter: stable both-edges;
-
-  /* Ahora reparamos la alineación de los hijos */
   * {
     direction: ltr; /* Restaurar dirección normal en el contenido */
     text-align: left;
@@ -113,6 +110,8 @@ header.app-header {
 .timeline-window {
   flex: 1;
   padding: 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* ---------------- PRIMENG TIMELINE ---------------- */

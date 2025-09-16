@@ -2,7 +2,7 @@
     <h2 class="page-title">Time Line</h2>
     <ul>
       @for (item of listOfThings; track $index) {
-          <li><button (click)="routerTo(item.path)">{{ item.label }}</button></li>
+        <li><button (click)="routerTo(item.path)">{{ item.label }}</button></li>
       }
     </ul>
 </header>
@@ -16,19 +16,14 @@
 
   <!-- Ventana principal para mostrar la línea de tiempo -->
   <section class="timeline-window">
-
-      <p-timeline [value]="eventos" align="alternate" styleClass="customized-timeline">
-        
-        <!-- Solo dejamos el contenido -->
-        <ng-template pTemplate="content" let-evento>
-          <p-card>
-            <h4>{{ evento.titulo }}</h4>
-            <p>{{ evento.descripcion }}</p>
-            <p>{{ evento.fecha }}</p>
-          </p-card>
-        </ng-template>
-
-      </p-timeline>
-
+    <p-timeline [value]="eventos" align="alternate" styleClass="customized-timeline">
+      <ng-template pTemplate="content" let-evento>
+        <p-card>
+          <h4>{{ evento.titulo }}</h4>
+          <p>{{ evento.descripcion }}</p>
+          <p>{{ evento.fecha }}</p>
+        </p-card>
+      </ng-template>
+    </p-timeline>
   </section>
 </main>

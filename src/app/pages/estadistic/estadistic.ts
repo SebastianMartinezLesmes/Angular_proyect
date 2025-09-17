@@ -57,12 +57,12 @@ export class EstadisticComponent implements AfterViewInit {
     equipamiento: {
       arma_d: {
         nombre: "Pistola de Plasma",
-        daño: 280,
+        dano: 280,
         rareza: "Rara"
       },
       arma_cc: {
         nombre: "Espada de Plasma",
-        daño: 380,
+        dano: 380,
         rareza: "Comun"
       },
       armadura: {
@@ -78,8 +78,8 @@ export class EstadisticComponent implements AfterViewInit {
   };
 
   equipList = [
-    { icon: "🔫", label: `${this.player.equipamiento.arma_d.nombre} (${this.player.equipamiento.arma_d.daño} dmg, ${this.player.equipamiento.arma_d.rareza})` },
-    { icon: "🗡️", label: `${this.player.equipamiento.arma_cc.nombre} (${this.player.equipamiento.arma_cc.daño} dmg, ${this.player.equipamiento.arma_cc.rareza})` },
+    { icon: "🔫", label: `${this.player.equipamiento.arma_d.nombre} (${this.player.equipamiento.arma_d.dano} dmg, ${this.player.equipamiento.arma_d.rareza})` },
+    { icon: "🗡️", label: `${this.player.equipamiento.arma_cc.nombre} (${this.player.equipamiento.arma_cc.dano} dmg, ${this.player.equipamiento.arma_cc.rareza})` },
     { icon: "🛡️", label: `${this.player.equipamiento.armadura.nombre} (${this.player.equipamiento.armadura.defensa} def, ${this.player.equipamiento.armadura.rareza})` },
     { icon: "💍", label: `${this.player.equipamiento.accesorio.nombre} (${this.player.equipamiento.accesorio.bonus})` },
   ];
@@ -95,13 +95,8 @@ export class EstadisticComponent implements AfterViewInit {
     const chartDom = document.getElementById('barChart')!;
     const myChart = echarts.init(chartDom);
 
-    // Extraemos nombres de elementos
     const categories = this.player.elementos.map(e => e.elemento);
-
-    // Resistencia (f)
     const resistencias = this.player.elementos.map(e => e.f);
-
-    // Debilidad (d)
     const debilidades = this.player.elementos.map(e => e.d);
 
     const option: echarts.EChartsOption = {
@@ -147,13 +142,19 @@ export class EstadisticComponent implements AfterViewInit {
 
     myChart.setOption(option);
     window.addEventListener('resize', () => myChart.resize());
-  }
+  };
 
   private initRadarChart() {
     const chartDom = document.getElementById('radarChart')!;
     const myChart = echarts.init(chartDom);
-    const option = {
-      title: { text: 'Gráfico Telaraña' },
+
+    const option: echarts.EChartsOption = {
+      title: { 
+        text: 'Gráfico Telaraña',
+        textStyle: {
+          color: '#00fff7'
+        }
+      },
       tooltip: {},
       radar: {
         indicator: [
@@ -162,7 +163,16 @@ export class EstadisticComponent implements AfterViewInit {
           { name: 'Agilidad', max: 100 },
           { name: 'Resistencia', max: 100 },
           { name: 'Inteligencia', max: 100 }
-        ]
+        ],
+        axisName: {
+          color: '#fff',
+          fontSize: 12,
+          fontWeight: 'bold',
+          textShadowColor: '0 0 6px #00fff7'
+        },
+        splitLine: { lineStyle: { color: 'rgba(0,255,255,0.3)' } },
+        splitArea: { areaStyle: { color: ['rgba(0,255,255,0.05)', 'rgba(125,42,232,0.1)'] } },
+        axisLine: { lineStyle: { color: 'rgba(0,255,255,0.5)' } }
       },
       series: [
         {
@@ -170,17 +180,31 @@ export class EstadisticComponent implements AfterViewInit {
           type: 'radar',
           data: [
             {
-              value: [80, 90, 70, 85, 60],
-              name: 'Jugador 1',
+              value: [
+                this.player.atributos.velocidad,
+                this.player.atributos.fuerza,
+                this.player.atributos.agilidad,
+                this.player.atributos.resistencia,
+                this.player.atributos.inteligencia
+              ],
+              name: this.player.name,
               areaStyle: { color: 'rgba(0, 188, 212, 0.3)' },
-              lineStyle: { color: '#00bcd4' }
+              lineStyle: { color: '#00bcd4' },
+              symbol: 'circle',
+              symbolSize: 6,
+              itemStyle: {
+                color: '#00fff7',
+                borderColor: '#7d2ae8',
+                borderWidth: 2
+              }
             }
           ]
         }
       ]
-    };
+    }
     myChart.setOption(option);
-  }
+    window.addEventListener('resize', () => myChart.resize());
+  };
 
   private initDonutChart() {
     const chartDom = document.getElementById('donutChart')!;
@@ -215,7 +239,7 @@ export class EstadisticComponent implements AfterViewInit {
       ]
     };
     myChart.setOption(option);
-  }
+  };
 
   private initLineRaceChart() {
     const chartDom = document.getElementById('lineRaceChart')!;

@@ -16,7 +16,6 @@
   <!-- Detalles -->
   <div class="details">
     <h2>{{ player.name }}</h2>
-    <p class="role">Clase: Guerrero Cibernético</p>
 
     <!-- Estadísticas básicas -->
     <ul class="stats">
@@ -31,14 +30,6 @@
     <ul class="equipment">
       @for (eq of equipList; track $index) {
         <li>{{ eq.icon }} {{ eq.label }}</li>
-      }
-    </ul>
-
-    <!-- Elementos -->
-    <h3>Elementos</h3>
-    <ul class="elements">
-      @for (e of player.elementos; track $index) {
-        <li>{{ e.elemento }} → F: {{ e.f }} | D: {{ e.d }}</li>
       }
     </ul>
   </div>

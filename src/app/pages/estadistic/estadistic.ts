@@ -26,7 +26,7 @@ export class EstadisticComponent implements AfterViewInit {
     experiencia: {
       actual: 8500,
       max: 10000,
-      porcentaje: "85%"
+      porcentaje: `${(8500 / 10000 * 100).toFixed(2)}%`
     },
     atributos: {
       velocidad: 80,
@@ -94,23 +94,59 @@ export class EstadisticComponent implements AfterViewInit {
   private initBarChart() {
     const chartDom = document.getElementById('barChart')!;
     const myChart = echarts.init(chartDom);
-    const option = {
-      title: { text: 'Gráfico de Barras' },
-      tooltip: {},
+
+    // Extraemos nombres de elementos
+    const categories = this.player.elementos.map(e => e.elemento);
+
+    // Resistencia (f)
+    const resistencias = this.player.elementos.map(e => e.f);
+
+    // Debilidad (d)
+    const debilidades = this.player.elementos.map(e => e.d);
+
+    const option: echarts.EChartsOption = {
+      title: {
+        text: 'Resistencias y Debilidades por Elemento',
+        textStyle: {
+          color: '#00fff7'
+        }
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['Resistencia', 'Debilidad'],
+        textStyle: { color: '#fff' }
+      },
       xAxis: {
         type: 'category',
-        data: ['A', 'B', 'C', 'D', 'E']
+        data: categories,
+        axisLine: { lineStyle: { color: '#00fff7' } },
+        axisLabel: { color: '#e0f7fa' }
       },
-      yAxis: { type: 'value' },
+      yAxis: {
+        type: 'value',
+        axisLine: { lineStyle: { color: '#00fff7' } },
+        axisLabel: { color: '#e0f7fa' }
+      },
       series: [
         {
-          data: [10, 22, 28, 23, 19],
+          name: 'Resistencia',
+          data: resistencias,
           type: 'bar',
-          color: '#00bcd4'
+          itemStyle: { color: '#12cff0ff' }
+        },
+        {
+          name: 'Debilidad',
+          data: debilidades,
+          type: 'bar',
+          itemStyle: { color: '#1e00a3ff' }
         }
       ]
     };
+
     myChart.setOption(option);
+    window.addEventListener('resize', () => myChart.resize());
   }
 
   private initRadarChart() {

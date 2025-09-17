@@ -15,6 +15,7 @@ export class HomeComponent {
   listOfThings = [
     { label: 'API', path: '/api' },
     { label: 'Time Line', path: '/time_line' },
+    { label: 'Estadisctics', path: '/estadistic' },
     { label: 'Logout', path: '/login' },
   ];
 

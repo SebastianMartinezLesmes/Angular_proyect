@@ -1,0 +1,52 @@
+<header class="app-header">
+  <h1>Estadistics</h1>
+  <nav>
+    @for (item of listOfThings; track $index) {
+      <button (click)="routerTo(item.path)">{{ item.label }}</button>
+    }
+  </nav>
+</header>
+
+<section class="player-info">
+  <!-- Avatar -->
+  <div class="avatar">
+    <img src="assets/character.png" alt="Player Avatar">
+  </div>
+
+  <!-- Detalles -->
+  <div class="details">
+    <h2>{{ player.name }}</h2>
+    <p class="role">Clase: Guerrero Cibernético</p>
+
+    <!-- Estadísticas básicas -->
+    <ul class="stats">
+      <li>⚡ Nivel: <span>{{ player.nivel }}</span></li>
+      <li>❤️ Vida: <span>{{ player.estado.vida.actual }}/{{ player.estado.vida.max }}</span></li>
+      <li>🔋 Energía: <span>{{ player.estado.energia.actual }}/{{ player.estado.energia.max }}</span></li>
+      <li>💎 XP: <span>{{ player.experiencia.porcentaje }}</span></li>
+    </ul>
+
+    <!-- Equipamiento -->
+    <h3>Equipamiento</h3>
+    <ul class="equipment">
+      @for (eq of equipList; track $index) {
+        <li>{{ eq.icon }} {{ eq.label }}</li>
+      }
+    </ul>
+
+    <!-- Elementos -->
+    <h3>Elementos</h3>
+    <ul class="elements">
+      @for (e of player.elementos; track $index) {
+        <li>{{ e.elemento }} → F: {{ e.f }} | D: {{ e.d }}</li>
+      }
+    </ul>
+  </div>
+</section>
+
+<main class="charts-container">
+  <div id="barChart" class="chart"></div>
+  <div id="radarChart" class="chart"></div>
+  <div id="donutChart" class="chart"></div>
+  <div id="lineRaceChart" class="chart"></div>
+</main>

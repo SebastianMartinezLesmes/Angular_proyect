@@ -3,8 +3,10 @@ import { ApiComponent } from './pages/api/api';
 import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
 import { TimeLineComponent } from './pages/time-line/time-line';
+import { EstadisticComponent } from './pages/estadistic/estadistic';
 
 export const routes: Routes = [
+    { path: 'estadistic', component: EstadisticComponent }, // ruta para time line
     { path: 'time_line', component: TimeLineComponent }, // ruta para time line
     { path: 'login', component: LoginComponent }, // ruta para login
     { path: 'home', component: HomeComponent },   // ruta para home

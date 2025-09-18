@@ -67,12 +67,14 @@ export class EstadisticComponent implements AfterViewInit {
       },
       armadura: {
         nombre: "Exotraje Neón",
-        defensa: 135,
+        defensa: 300,
         rareza: "Muy Rara"
       },
       accesorio: {
         nombre: "Implante Neural de Precisión",
-        bonus: "+10% crítico"
+        defensa: 300,
+        dano: 10,
+        rareza: "Muy Rara"
       }
     }
   };
@@ -81,7 +83,7 @@ export class EstadisticComponent implements AfterViewInit {
     { icon: "🔫", label: `${this.player.equipamiento.arma_d.nombre} (${this.player.equipamiento.arma_d.dano} dmg, ${this.player.equipamiento.arma_d.rareza})` },
     { icon: "🗡️", label: `${this.player.equipamiento.arma_cc.nombre} (${this.player.equipamiento.arma_cc.dano} dmg, ${this.player.equipamiento.arma_cc.rareza})` },
     { icon: "🛡️", label: `${this.player.equipamiento.armadura.nombre} (${this.player.equipamiento.armadura.defensa} def, ${this.player.equipamiento.armadura.rareza})` },
-    { icon: "💍", label: `${this.player.equipamiento.accesorio.nombre} (${this.player.equipamiento.accesorio.bonus})` },
+    { icon: "💍", label: `${this.player.equipamiento.accesorio.nombre} (+${this.player.equipamiento.accesorio.dano} dmg, ${this.player.equipamiento.accesorio.defensa} def, ${this.player.equipamiento.accesorio.rareza})` },
   ];
 
   ngAfterViewInit() {
@@ -150,7 +152,7 @@ export class EstadisticComponent implements AfterViewInit {
 
     const option: echarts.EChartsOption = {
       title: { 
-        text: 'Gráfico Telaraña',
+        text: 'Atributos',
         textStyle: {
           color: '#00fff7'
         }
@@ -209,36 +211,73 @@ export class EstadisticComponent implements AfterViewInit {
   private initDonutChart() {
     const chartDom = document.getElementById('donutChart')!;
     const myChart = echarts.init(chartDom);
-    const option = {
-      title: { text: 'Gráfico de Dona', left: 'center' },
-      tooltip: { trigger: 'item' },
-      legend: { orient: 'vertical', left: 'left' },
+
+    // ⚔️ Cálculos de daño
+    const danoCC = this.player.equipamiento.arma_cc.dano;
+    const danoDist = this.player.equipamiento.arma_d.dano;
+    const danoAcc = this.player.equipamiento.accesorio.dano;
+    const danoTotal = danoCC + danoDist + danoAcc;
+
+    // 🛡️ Cálculos de defensa
+    const defArmadura = this.player.equipamiento.armadura.defensa;
+    const defAcc = this.player.equipamiento.accesorio.defensa;
+    const defensaTotal = defArmadura + defAcc;
+
+    const option: echarts.EChartsOption = {
+      title: { 
+        text: 'Daño vs Defensa',
+        left: 'center',
+        textStyle: { color: '#00fff7' }
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: (params: any) => {
+          if (params.name.includes("Daño")) {
+            return `
+              <b>⚔️ Daño Total: ${danoTotal}</b><br/>
+              🗡️ Cuerpo a Cuerpo: ${danoCC}<br/>
+              🔫 A Distancia: ${danoDist}<br/>
+              💍 Accesorio: ${danoAcc}
+            `;
+          } else {
+            return `
+              <b>🛡️ Defensa Total: ${defensaTotal}</b><br/>
+              🛡️ Armadura: ${defArmadura}<br/>
+              💍 Accesorio: ${defAcc}
+            `;
+          }
+        }
+      },
+      legend: { 
+        orient: 'vertical', 
+        left: 'left',
+        textStyle: { color: '#fff' }
+      },
       series: [
         {
-          name: 'Acceso',
+          name: 'Equipamiento',
           type: 'pie',
           radius: ['40%', '70%'],
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: '#fff',
-            borderWidth: 2
+          itemStyle: { 
+            borderRadius: 10, 
+            borderColor: '#000', 
+            borderWidth: 2 
           },
-          label: { show: false, position: 'center' },
-          emphasis: {
-            label: { show: true, fontSize: 18, fontWeight: 'bold' }
+          label: { 
+            show: true, 
+            formatter: '{b}: {c}', 
+            color: '#fff' 
           },
-          labelLine: { show: false },
           data: [
-            { value: 40, name: 'Chrome' },
-            { value: 25, name: 'Firefox' },
-            { value: 20, name: 'Edge' },
-            { value: 15, name: 'Safari' }
+            { value: danoTotal, name: 'Daño ⚔️', itemStyle: { color: '#ff3366' } },
+            { value: defensaTotal, name: 'Defensa 🛡️', itemStyle: { color: '#33ccff' } }
           ]
         }
       ]
     };
+
     myChart.setOption(option);
+    window.addEventListener('resize', () => myChart.resize());
   };
 
   private initLineRaceChart() {

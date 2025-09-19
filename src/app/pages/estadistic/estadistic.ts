@@ -110,7 +110,11 @@ export class EstadisticComponent implements AfterViewInit {
         }
       },
       tooltip: {
-        trigger: 'axis'
+        trigger: 'axis',
+        backgroundColor: '#1a1a2e',
+        borderColor: '#00fff7',
+        borderWidth: 1,
+        textStyle: { color: '#fff' }
       },
       legend: {
         data: ['Resistencia', 'Debilidad'],
@@ -158,7 +162,12 @@ export class EstadisticComponent implements AfterViewInit {
           color: '#00fff7'
         }
       },
-      tooltip: {},
+      tooltip: {
+        backgroundColor: '#1a1a2e',
+        borderColor: '#00fff7',
+        borderWidth: 1,
+        textStyle: { color: '#fff' }
+      },
       radar: {
         indicator: [
           { name: 'Velocidad', max: 100 },
@@ -247,7 +256,11 @@ export class EstadisticComponent implements AfterViewInit {
               💍 Accesorio: ${defAcc}
             `;
           }
-        }
+        },
+        backgroundColor: '#1a1a2e',
+        borderColor: '#00fff7',
+        borderWidth: 1,
+        textStyle: { color: '#fff' }
       },
       legend: { 
         orient: 'vertical', 
@@ -385,7 +398,13 @@ export class EstadisticComponent implements AfterViewInit {
           color: '#00fff79a'
         }
       },
-      tooltip: { trigger: 'axis' },
+      tooltip: { 
+        trigger: 'axis',
+        backgroundColor: '#1a1a2e',
+        borderColor: '#00fff7',
+        borderWidth: 1,
+        textStyle: { color: '#fff' }
+      },
       legend: {
         top: '90%', 
         left: 'center', 

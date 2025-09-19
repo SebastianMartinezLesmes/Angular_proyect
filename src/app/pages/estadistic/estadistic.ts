@@ -90,6 +90,7 @@ export class EstadisticComponent implements AfterViewInit {
     this.initBarChart();
     this.initRadarChart();
     this.initDonutChart();
+    this.initGaugeChart();
     this.initLineRaceChart();
   }
 
@@ -271,6 +272,97 @@ export class EstadisticComponent implements AfterViewInit {
           data: [
             { value: danoTotal, name: 'Daño ⚔️', itemStyle: { color: '#ff3366' } },
             { value: defensaTotal, name: 'Defensa 🛡️', itemStyle: { color: '#33ccff' } }
+          ]
+        }
+      ]
+    };
+
+    myChart.setOption(option);
+    window.addEventListener('resize', () => myChart.resize());
+  };
+
+  private initGaugeChart() {
+    const chartDom = document.getElementById('gaugeChart')!;
+    const myChart = echarts.init(chartDom);
+
+    const porcentaje = (this.player.experiencia.actual / this.player.experiencia.max) * 100;
+
+    const option: echarts.EChartsOption = {
+      title: {
+        text: `Nivel ${this.player.nivel}`,
+        left: 'center',
+        top: '5%',
+        textStyle: {
+          color: '#00fff7',
+          fontSize: 18,
+          fontWeight: 'bold',
+        }
+      },
+      tooltip: {
+        formatter: (params: any) => {
+          return `
+            <b>Nivel ${this.player.nivel}</b><br/>
+            Progreso: ${params.value}%<br/>
+            XP: ${this.player.experiencia.actual} / ${this.player.experiencia.max}
+          `;
+        },
+        backgroundColor: '#1a1a2e',
+        borderColor: '#00fff7',
+        borderWidth: 1,
+        textStyle: { color: '#fff' }
+      },
+      series: [
+        {
+          type: 'gauge',
+          startAngle: 180,   // semi círculo
+          endAngle: 0,
+          center: ['50%', '70%'],
+          radius: '90%',
+          progress: {
+            show: true,
+            width: 18,
+            itemStyle: {
+              color: '#00e5ff',
+              shadowColor: '#7d2ae8',
+              shadowBlur: 10
+            }
+          },
+          axisLine: {
+            lineStyle: {
+              width: 18,
+              color: [[1, '#1a1a2e']] // fondo
+            }
+          },
+          axisTick: { show: false },
+          splitLine: { show: false },
+          axisLabel: { show: true },
+          pointer: {
+            show: true,
+            icon: 'rect',
+            length: '55%',
+            width: 6,
+            itemStyle: {
+              color: '#9c27b0'
+            }
+          },
+          anchor: {
+            show: true,
+            size: 10,
+            itemStyle: {
+              color: '#9c27b0'
+            }
+          },
+          detail: {
+            valueAnimation: true,
+            formatter: `{value}%`,
+            color: '#fff',
+            fontSize: 22,
+            offsetCenter: [0, '40%']
+          },
+          data: [
+            {
+              value: + porcentaje.toFixed(2)
+            }
           ]
         }
       ]

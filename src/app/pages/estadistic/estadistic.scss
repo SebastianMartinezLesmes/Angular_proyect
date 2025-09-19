@@ -1,58 +1,58 @@
-/* === Estilo general futurista === */
+/* === Estilo general futurista/cyberpunk === */
 :host {
   display: block;
   min-height: 100vh;
-  background: radial-gradient(circle at 20% 20%, #0f2027, #203a43, #2c5364);
-  font-family: 'Orbitron', sans-serif; /* Fuente estilo futurista */
+  background: radial-gradient(circle at 30% 30%, #050510, #0a0f1c, #111a2e);
+  font-family: 'Orbitron', sans-serif;
   color: #e0f7fa;
   overflow-x: hidden;
 }
 
 /* === Header futurista === */
 .app-header {
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #fff;
+  background: linear-gradient(135deg, rgba(0, 255, 247, 0.08), rgba(125, 42, 232, 0.08));
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(0, 255, 255, 0.5);
+  box-shadow: 0 4px 25px rgba(0, 255, 255, 0.25);
   padding: 1.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid rgba(0, 255, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.2);
   position: sticky;
   top: 0;
   z-index: 1000;
 
   h1 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    background: linear-gradient(90deg, #00fff7, #7d2ae8);
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #00fff7, #ff00ff, #7d2ae8);
+    background-size: 300% 300%;
 
-    /* ✅ Compatibilidad */
-    background-clip: text;              /* estándar */
-    -webkit-background-clip: text;      /* Safari/Chrome */
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    text-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+    animation: gradientShift 6s infinite linear;
+    text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
     margin: 0;
-    text-transform: uppercase;
   }
 
   nav {
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
 
     button {
       background: transparent;
       border: 2px solid #00fff7;
       color: #00fff7;
-      padding: 0.6rem 1.4rem;
-      border-radius: 12px;
-      font-size: 0.95rem;
-      font-weight: 600;
+      padding: 0.7rem 1.5rem;
+      border-radius: 14px;
+      font-size: 1rem;
+      font-weight: 700;
       letter-spacing: 1px;
       cursor: pointer;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.35s ease-in-out;
       position: relative;
       overflow: hidden;
       text-transform: uppercase;
@@ -61,22 +61,23 @@
         content: "";
         position: absolute;
         top: 0;
-        left: -100%;
-        width: 100%;
+        left: -120%;
+        width: 120%;
         height: 100%;
         background: linear-gradient(
-          90deg,
-          rgba(0, 255, 255, 0.2),
-          rgba(125, 42, 232, 0.3)
+          120deg,
+          rgba(0, 255, 255, 0.25),
+          rgba(125, 42, 232, 0.35),
+          rgba(255, 0, 255, 0.25)
         );
-        transition: left 0.4s ease;
+        transition: left 0.5s ease;
         z-index: 0;
       }
 
       &:hover {
         color: #fff;
-        border-color: #7d2ae8;
-        box-shadow: 0 0 15px #7d2ae8, 0 0 30px rgba(0, 255, 255, 0.4);
+        border-color: #ff00ff;
+        box-shadow: 0 0 20px #7d2ae8, 0 0 40px rgba(0, 255, 255, 0.6);
 
         &::before {
           left: 0;
@@ -84,7 +85,7 @@
       }
 
       &:active {
-        transform: scale(0.95);
+        transform: scale(0.92);
       }
 
       span,
@@ -103,130 +104,119 @@
   gap: 2rem;
   padding: 2rem;
   margin: 2rem;
-  background: rgba(15, 32, 39, 0.9);
-  border-radius: 20px;
-  border: 1px solid rgba(0, 255, 255, 0.2);
-  box-shadow: 0 0 25px rgba(0, 255, 255, 0.15),
-              inset 0 0 12px rgba(125, 42, 232, 0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: neonPulse 4s infinite alternate;
+  background: rgba(10, 20, 35, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.25),
+              inset 0 0 18px rgba(255, 0, 255, 0.2);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  animation: neonPulse 3s infinite alternate;
 
   &:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4),
-                0 0 45px rgba(125, 42, 232, 0.4);
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.6),
+                0 0 55px rgba(255, 0, 255, 0.4);
   }
 
-  /* === Avatar del jugador === */
   .avatar {
-    flex: 0 0 120px;
-    width: 120px;
-    height: 120px;
+    flex: 0 0 130px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     overflow: hidden;
     border: 3px solid #00fff7;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.5),
-                0 0 25px rgba(125, 42, 232, 0.5);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.6),
+                0 0 30px rgba(125, 42, 232, 0.6);
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: drop-shadow(0 0 10px #00fff7);
+      filter: drop-shadow(0 0 15px #00fff7);
     }
   }
 
-  /* === Detalles del jugador === */
   .details {
     flex: 1;
-    color: #e0f7fa;
 
     h2 {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       text-transform: uppercase;
-      font-weight: 700;
-      margin: 0 0 0.5rem;
-      background: linear-gradient(90deg, #00fff7, #7d2ae8);
+      font-weight: 800;
+      margin: 0 0 0.6rem;
+      background: linear-gradient(90deg, #00fff7, #ff00ff, #7d2ae8);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 12px rgba(0, 255, 255, 0.7);
+      animation: gradientShift 6s infinite linear;
     }
 
-    .role {
-      font-size: 1rem;
-      font-weight: 500;
-      color: #7dceff;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 8px rgba(125, 42, 232, 0.7);
-    }
-
-    /* === Lista de estadísticas === */
     .stats {
       list-style: none;
       padding: 0;
       margin: 0;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 0.8rem 2rem;
+      gap: 1rem 2rem;
 
       li {
         font-size: 1rem;
-        font-weight: 600;
+        font-weight: 700;
         color: #00fff7;
         letter-spacing: 1px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(0, 255, 255, 0.05);
-        padding: 0.5rem 0.8rem;
-        border-radius: 10px;
-        border: 1px solid rgba(0, 255, 255, 0.15);
-        box-shadow: inset 0 0 8px rgba(125, 42, 232, 0.2);
+        background: rgba(0, 255, 255, 0.08);
+        padding: 0.6rem 0.9rem;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 255, 255, 0.25);
+        box-shadow: inset 0 0 10px rgba(255, 0, 255, 0.25);
 
         span {
           color: #fff;
-          font-weight: 700;
-          text-shadow: 0 0 6px #7d2ae8, 0 0 10px #00fff7;
+          font-weight: 800;
+          text-shadow: 0 0 8px #7d2ae8, 0 0 12px #00fff7;
         }
       }
     }
   }
 }
 
-/* === Equipamiento y Elementos === */
-.equipment,
-.elements {
+/* === Equipamiento === */
+.equipment {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0;
+  margin: 1.2rem 0 0;
   display: grid;
-  gap: 0.6rem;
+  gap: 0.8rem;
 
   li {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #fff;
-    background: rgba(0, 255, 255, 0.08);
-    padding: 0.5rem 0.8rem;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 255, 255, 0.15);
-    text-shadow: 0 0 6px #7d2ae8, 0 0 10px #00fff7;
-    transition: transform 0.2s ease;
+    background: rgba(255, 0, 255, 0.08);
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.25);
+    text-shadow: 0 0 8px #7d2ae8, 0 0 12px #00fff7;
+    transition: transform 0.25s ease, background 0.25s ease;
 
     &:hover {
-      transform: scale(1.03);
-      background: rgba(125, 42, 232, 0.15);
+      transform: scale(1.06);
+      background: rgba(125, 42, 232, 0.25);
     }
   }
 }
 
 /* === Títulos secundarios === */
 h3 {
-  margin-top: 1.5rem;
-  font-size: 1.2rem;
-  background: linear-gradient(90deg, #00fff7, #7d2ae8);
+  margin-top: 1.8rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00fff7, #ff00ff, #7d2ae8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  animation: gradientShift 6s infinite linear;
 }
 
 /* === Contenedor de gráficos === */
@@ -234,63 +224,52 @@ h3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 400px;
-  gap: 1.5rem;
+  gap: 1.8rem;
   padding: 2rem;
 
   .chart {
     width: 100%;
     height: 100%;
-    background: rgba(15, 32, 39, 0.9);
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15),
-                inset 0 0 10px rgba(125, 42, 232, 0.2);
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(10, 20, 35, 0.9);
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2),
+                inset 0 0 12px rgba(255, 0, 255, 0.25);
+    border: 1px solid rgba(0, 255, 255, 0.25);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
 
     &:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3),
-                  0 0 35px rgba(125, 42, 232, 0.3);
+      transform: scale(1.03);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.4),
+                  0 0 40px rgba(255, 0, 255, 0.3);
     }
-  }
-
-  #donutChart {
-    grid-column: span 2; /* ocupa todo el ancho */
   }
 }
 
 #lineRaceChart {
-  grid-column: span 2; /* ocupa todo el ancho */
-  height: 400px;
-  background: rgba(15, 32, 39, 0.9);
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2),
-              inset 0 0 10px rgba(125, 42, 232, 0.3);
-  border: 1px solid rgba(0, 255, 255, 0.2);
+  grid-column: span 2;
+  height: 420px;
+  background: rgba(10, 20, 35, 0.9);
+  border-radius: 18px;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.3),
+              inset 0 0 12px rgba(255, 0, 255, 0.25);
+  border: 1px solid rgba(0, 255, 255, 0.25);
 }
 
-/* === Animaciones adicionales === */
+/* === Animaciones === */
 @keyframes neonPulse {
   0% {
-    box-shadow: 0 0 10px #00fff7, 0 0 20px #7d2ae8;
+    box-shadow: 0 0 12px #00fff7, 0 0 22px #ff00ff;
   }
   50% {
-    box-shadow: 0 0 20px #00fff7, 0 0 40px #7d2ae8;
+    box-shadow: 0 0 24px #00fff7, 0 0 44px #7d2ae8;
   }
   100% {
-    box-shadow: 0 0 10px #00fff7, 0 0 20px #7d2ae8;
+    box-shadow: 0 0 12px #00fff7, 0 0 22px #ff00ff;
   }
 }
 
-/* === Animación de brillo === */
-@keyframes neonPulse {
-  0% {
-    box-shadow: 0 0 10px #00fff7, 0 0 20px #7d2ae8;
-  }
-  50% {
-    box-shadow: 0 0 20px #00fff7, 0 0 40px #7d2ae8;
-  }
-  100% {
-    box-shadow: 0 0 10px #00fff7, 0 0 20px #7d2ae8;
-  }
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

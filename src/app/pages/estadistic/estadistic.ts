@@ -15,7 +15,7 @@ export class EstadisticComponent implements AfterViewInit {
     this.router.navigate([path]);
   }
 
-  listOfThings = [
+  listRoutes = [
     { label: 'Home', path: '/home' },
     { label: 'Logout', path: '/login' },
   ];

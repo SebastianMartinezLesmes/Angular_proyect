@@ -12,10 +12,11 @@ export class HomeComponent {
 
   constructor(private router: Router) {}
 
-  listOfThings = [
+  listRoutes = [
     { label: 'API', path: '/api' },
     { label: 'Time Line', path: '/time_line' },
     { label: 'Estadisctics', path: '/estadistic' },
+    { label: 'Gaming 2D', path: '/game' },
     { label: 'Logout', path: '/login' },
   ];
 

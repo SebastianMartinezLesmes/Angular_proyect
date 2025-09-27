@@ -1,7 +1,7 @@
 <header class="app-header">
     <h2 class="page-title">Time Line</h2>
     <ul>
-      @for (item of listOfThings; track $index) {
+      @for (item of listRoutes; track $index) {
         <li><button (click)="routerTo(item.path)">{{ item.label }}</button></li>
       }
     </ul>

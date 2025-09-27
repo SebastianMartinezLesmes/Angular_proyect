@@ -21,7 +21,7 @@ export class TimeLineComponent {
 
   eventos: any[] = [];
 
-  listOfThings = [
+  listRoutes = [
     { label: 'Home', path: '/home' },
     { label: 'Logout', path: '/login' },
   ];

@@ -1,0 +1,187 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  border-bottom: 2px solid #00fff7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #00fff7;
+    text-shadow: 0 0 8px rgba(0, 255, 247, 0.6);
+    margin: 0;
+  }
+
+  nav {
+    display: flex;
+    gap: 1rem;
+
+    button {
+      background: transparent;
+      border: 2px solid #00fff7;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      &:hover {
+        background: #00fff7;
+        color: #0f2027;
+        box-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
+        transform: translateY(-2px);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+// Contenedor de controles globales
+.controls {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+
+  .new-player-btn {
+    background: #00fff7;
+    color: #0f2027;
+    font-weight: bold;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0, 255, 247, 0.6);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #7d2ae8;
+      color: #fff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 0 20px #7d2ae8;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// Contenedor de batalla
+.battle-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 2rem auto;
+  color: #fff;
+}
+
+// Cada combatiente
+.combatant {
+  padding: 1rem;
+  border-radius: 12px;
+  background: #1d1d2e;
+  box-shadow: 0 0 12px #00fff7;
+  width: 220px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 20px #7d2ae8;
+  }
+
+  h2 {
+    margin-bottom: 0.8rem;
+    color: #00fff7;
+    font-size: 1.3rem;
+    text-shadow: 0 0 6px rgba(0, 255, 247, 0.6);
+  }
+
+  .stats {
+    margin-bottom: 1rem;
+
+    p {
+      margin: 0.4rem 0;
+      font-size: 0.95rem;
+
+      span {
+        font-weight: bold;
+        color: #ff4d6d;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    button {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .heal-btn {
+      background: #28a745;
+      color: #fff;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.6);
+
+      &:hover {
+        background: #34d058;
+        transform: scale(1.05);
+      }
+    }
+
+    .attack-btn {
+      background: #dc3545;
+      color: #fff;
+      box-shadow: 0 0 8px rgba(220, 53, 69, 0.6);
+
+      &:hover {
+        background: #ff4d6d;
+        transform: scale(1.05);
+      }
+    }
+
+    .target-select {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: center;
+
+      label {
+        font-size: 0.85rem;
+        color: #bbb;
+      }
+
+      select {
+        background: #0f2027;
+        border: 1px solid #00fff7;
+        color: #fff;
+        padding: 0.4rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: border 0.2s;
+
+        &:hover {
+          border-color: #7d2ae8;
+        }
+      }
+    }
+  }
+}

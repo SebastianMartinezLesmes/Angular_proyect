@@ -2,7 +2,7 @@
   <header class="app-header">
     <h1>Welcome to Angular 20 App</h1>
     <nav>
-      @for (item of listOfThings; track $index) {
+      @for (item of listRoutes; track $index) {
         <button (click)="routerTo(item.path)">{{ item.label }}</button>
       }
     </nav>

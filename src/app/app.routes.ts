@@ -4,6 +4,7 @@ import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
 import { TimeLineComponent } from './pages/time-line/time-line';
 import { EstadisticComponent } from './pages/estadistic/estadistic';
+import { GameComponent } from './pages/game/game';
 
 export const routes: Routes = [
     { path: 'estadistic', component: EstadisticComponent }, // ruta para time line
@@ -11,5 +12,6 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent }, // ruta para login
     { path: 'home', component: HomeComponent },   // ruta para home
     { path: 'api', component: ApiComponent },     // ruta para api
+    { path: 'game', component: GameComponent },     // ruta para game 2D
     { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

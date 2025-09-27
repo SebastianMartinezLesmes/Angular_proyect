@@ -1,0 +1,44 @@
+<header class="app-header">
+  <h1>Estadistics</h1>
+  <nav>
+    @for (item of listRoutes; track $index) {
+      <button (click)="routerTo(item.path)">{{ item.label }}</button>
+    }
+  </nav>
+</header>
+
+<div class="controls">
+  <title>🎮 Opciones de juego</title>
+    <button>Ranking</button>
+    <button>Historial de batallas</button>
+  <title>🧑‍🤝‍🧑 Gestión de jugadores</title>
+    <button class="new-player-btn" (click)="nuevoPlayer()">➕ Nuevo jugador</button>
+    <button class="new-player-btn" (click)="eliminarJugador()">➖ Eliminar jugador</button>
+    <button class="new-player-btn" (click)="eliminarJugadores()">➖ Eliminar jugadores</button>
+    <button class="new-player-btn" (click)="PersonalizarSalud()">❤️ Personalizar salud</button>
+    <button class="new-player-btn" (click)="personalizarAtaque()">⚔️ Personalizar ataque</button>
+    <button class="new-player-btn" (click)="PersonalizarDefensa()">🛡️ Personalizar defensa</button>
+</div>
+
+<main class="battle-container">
+  @for (player of listPlayers; track $index) {
+    <section class="combatant player">
+      <h2>🧑 Player {{ player.idPlayer }}</h2>
+      
+      <div class="stats">
+        <p>❤️ Vida: <span>{{ player.vida }}/200</span></p>
+        <p>⚔️ Ataque: <span>{{ player.ataque }}</span></p>
+        <p>🛡️ Defensa: <span>{{ player.defensa }}</span></p>
+      </div>
+
+      <div class="actions">
+        <!-- Curar -->
+        <button class="heal-btn" (click)="curar(player.idPlayer)">💊 Curar</button>
+
+        <!-- Atacar -->
+        <button class="attack-btn" (click)="atacar(player.idPlayer)">⚔️ Atacar</button>
+
+      </div>
+    </section>
+  }
+</main>

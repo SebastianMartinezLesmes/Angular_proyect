@@ -8,10 +8,10 @@
 </header>
 
 <div class="controls">
-  <title>🎮 Opciones de juego</title>
-    <button>Ranking</button>
-    <button>Historial de batallas</button>
-  <title>🧑‍🤝‍🧑 Gestión de jugadores</title>
+  <div>🎮 Opciones de juego</div>
+    <button class="new-player-btn" (click)="Ranking()">Ranking</button>
+    <button class="new-player-btn" (click)="Historialkills()">Historial de batallas</button>
+  <div>🧑‍🤝‍🧑 Gestión de jugadores</div>
     <button class="new-player-btn" (click)="nuevoPlayer()">Nuevo jugador</button>
     <button class="new-player-btn" (click)="eliminarJugador()">Eliminar jugador</button>
     <button class="new-player-btn" (click)="eliminarJugadores()">Eliminar jugadores</button>

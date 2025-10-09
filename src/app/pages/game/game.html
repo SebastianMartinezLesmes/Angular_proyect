@@ -24,20 +24,9 @@
     </div>
     <div class="menu-content" [class.open]="menus.jugadores">
       <button (click)="nuevoPlayer()">Nuevo jugador</button>
+      <button (click)="personalizarAtributo()">personalizar atributos jugador</button>
       <button (click)="eliminarJugador()">Eliminar jugador</button>
       <button (click)="eliminarJugadores()">Eliminar jugadores</button>
-    </div>
-  </div>
-
-  <div class="menu">
-    <div class="menu-header" (click)="toggleMenu('personalizar')">
-      🧑‍🤝‍🧑 Personalización jugador
-    </div>
-    <div class="menu-content" [class.open]="menus.personalizar">
-      <button (click)="personalizarAtributo('vidaMax')">💖 Personalizar salud maxima</button>
-      <button (click)="personalizarAtributo('vida')">❤️ Personalizar salud</button>
-      <button (click)="personalizarAtributo('ataque')">⚔️ Personalizar ataque</button>
-      <button (click)="personalizarAtributo('defensa')">🛡️ Personalizar defensa</button>
     </div>
   </div>
 </div>

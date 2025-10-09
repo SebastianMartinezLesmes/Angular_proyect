@@ -86,28 +86,54 @@ export class GameComponent {
     }
   }; 
 
-  async personalizarAtributo(tipo: 'ataque' | 'defensa' | 'vida' | 'vidaMax') {
+  async personalizarAtributo() {
     if (!this.lectorJugadores()) return;
-    const config = {
+
+    // 🔹 Configuración de los atributos disponibles
+    const atributos = {
+      vida: { icono: '❤️', label: 'salud' },
+      vidaMax: { icono: '💖', label: 'vida máxima' },
       ataque: { icono: '⚔️', label: 'ataque' },
       defensa: { icono: '🛡️', label: 'defensa' },
-      vidaMax:{ icono: '💖', label: 'vidaMax' },
-      vida:   { icono: '❤️', label: 'salud' },
-    }[tipo];
-    // Seleccionar jugador
+    };
+
+    // 🔹 Paso 1: seleccionar qué atributo modificar
+    const { value: tipo } = await Swal.fire({
+      title: 'Selecciona un atributo a personalizar',
+      input: 'select',
+      inputOptions: {
+        vida: '❤️ Salud actual',
+        vidaMax: '💖 Salud máxima',
+        ataque: '⚔️ Ataque',
+        defensa: '🛡️ Defensa',
+      },
+      inputPlaceholder: 'Elige un atributo...',
+      showCancelButton: true,
+    });
+
+    if (!tipo) return;
+
+    const config = atributos[tipo as keyof typeof atributos];
+
+    // 🔹 Paso 2: seleccionar jugador
     const jugador = await this.seleccionarJugador(
       undefined,
       p => `Player ${p.idPlayer} (${config.icono} ${p[tipo]})`
     );
+
     if (!jugador) return;
+
+    // 🔹 Paso 3: pedir nuevo valor
     const { value: nuevoValor } = await Swal.fire({
       title: `Configurar ${config.label} para Player ${jugador.idPlayer}`,
       input: 'number',
       inputLabel: `Nuevo valor de ${config.label}`,
       inputValue: jugador[tipo],
-      showCancelButton: true
+      showCancelButton: true,
+      inputAttributes: { min: '0', step: '1' },
     });
-    // Actualizar y mostrar resultado
+
+    // 🔹 Paso 4: actualizar y mostrar resultado
     if (nuevoValor !== undefined) {
       jugador[tipo] = +nuevoValor;
       console.log(`${config.icono} Player ${jugador.idPlayer} ahora tiene ${config.label}: ${jugador[tipo]}`);
@@ -116,10 +142,11 @@ export class GameComponent {
         title: `${config.label.charAt(0).toUpperCase() + config.label.slice(1)} actualizada`,
         text: `Player ${jugador.idPlayer} ahora tiene ${config.label} ${jugador[tipo]}`,
         timer: 2000,
-        showConfirmButton: false
+        showConfirmButton: false,
       });
     }
-  };
+  }
+
 
 // Acciones del jugador
   async atacar(atacanteId: number) {

@@ -49,29 +49,69 @@
 // Contenedor de controles globales
 .controls {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  margin: 1.5rem 0;
+  gap: 1rem;
+  max-width: 100%;
+  margin: 1.5rem auto;
+  font-family: Arial, sans-serif;
 
-  .new-player-btn {
-    background: #00fff7;
-    color: #0f2027;
-    font-weight: bold;
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 12px rgba(0, 255, 247, 0.6);
-    transition: all 0.3s ease;
+  .menu {
+    flex: 1 1 200px;
+    max-width: 250px;
+    border: 2px solid #00fff7;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 247, 0.5);
+    background: #0f2027;
+    display: flex;
+    flex-direction: column;
 
-    &:hover {
-      background: #7d2ae8;
-      color: #fff;
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 0 20px #7d2ae8;
+    .menu-header {
+      color: #00fff7;
+      font-weight: bold;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover {
+        background: #203a43;
+      }
     }
 
-    &:active {
-      transform: scale(0.95);
+    .menu-content {
+      max-height: 0;          /* 🔴 cerrado por defecto */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0 1rem;
+      transition: max-height 0.4s ease;
+
+      &.open {
+        max-height: 300px;    /* 🟢 altura máxima al abrir */
+        padding: 0.8rem 1rem; /* se muestra el contenido */
+      }
+
+      button {
+        background: #00fff7;
+        color: #0f2027;
+        font-weight: bold;
+        padding: 0.6rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #7d2ae8;
+          color: #fff;
+          transform: translateY(-2px) scale(1.05);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
     }
   }
 }

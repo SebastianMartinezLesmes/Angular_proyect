@@ -14,14 +14,24 @@ export class GameComponent {
 
   routerTo(path: string) {
     this.router.navigate([path]);
-  }
+  };
 
   listRoutes = [
     { label: 'Home', path: '/home' },
     { label: 'Logout', path: '/login' },
   ];
 
-  // Gestión de jugadores
+  menus = {
+    juego: false,
+    jugadores: false,
+    personalizar: false,
+  };
+
+  toggleMenu(menu: keyof typeof this.menus) {
+    this.menus[menu] = !this.menus[menu];
+  };
+
+// Gestión de jugadores
   lastId = 0;
   listPlayers:any [] = [];
 
@@ -75,94 +85,41 @@ export class GameComponent {
     }
   }; 
 
-  async personalizarAtaque() {
+  async personalizarAtributo(tipo: 'ataque' | 'defensa' | 'vida') {
     if (!this.lectorJugadores()) return;
+    const config = {
+      ataque: { icono: '⚔️', label: 'ataque' },
+      defensa: { icono: '🛡️', label: 'defensa' },
+      vida:   { icono: '❤️', label: 'salud' }
+    }[tipo];
     // Seleccionar jugador
     const jugador = await this.seleccionarJugador(
-      undefined, // no aplicamos filtro, todos los jugadores son válidos
-      p => `Player ${p.idPlayer} (⚔️ ${p.ataque})` // etiqueta personalizada
+      undefined,
+      p => `Player ${p.idPlayer} (${config.icono} ${p[tipo]})`
     );
     if (!jugador) return;
-
-    // Pedir nuevo ataque
-    const { value: ataque } = await Swal.fire({
-      title: `Configurar ataque para Player ${jugador.idPlayer}`,
+    const { value: nuevoValor } = await Swal.fire({
+      title: `Configurar ${config.label} para Player ${jugador.idPlayer}`,
       input: 'number',
-      inputLabel: 'Nuevo valor de ataque',
-      inputValue: jugador.ataque,
+      inputLabel: `Nuevo valor de ${config.label}`,
+      inputValue: jugador[tipo],
       showCancelButton: true
     });
-
-    if (ataque !== undefined) {
-      jugador.ataque = +ataque;
-
-      console.log(`⚔️ Player ${jugador.idPlayer} ahora tiene ataque: ${jugador.ataque}`);
-
+    // Actualizar y mostrar resultado
+    if (nuevoValor !== undefined) {
+      jugador[tipo] = +nuevoValor;
+      console.log(`${config.icono} Player ${jugador.idPlayer} ahora tiene ${config.label}: ${jugador[tipo]}`);
       Swal.fire({
         icon: 'success',
-        title: 'Ataque actualizado',
-        text: `Player ${jugador.idPlayer} ahora tiene ataque ${jugador.ataque}`,
+        title: `${config.label.charAt(0).toUpperCase() + config.label.slice(1)} actualizada`,
+        text: `Player ${jugador.idPlayer} ahora tiene ${config.label} ${jugador[tipo]}`,
         timer: 2000,
         showConfirmButton: false
       });
     }
   };
 
-  async PersonalizarDefensa() {
-    if (!this.lectorJugadores()) return;
-    const jugador = await this.seleccionarJugador(
-      undefined, // no aplicamos filtro, todos los jugadores son válidos
-      p => `Player ${p.idPlayer} (⚔️ ${p.ataque})` // etiqueta personalizada
-    );
-    if (!jugador) return;
-    const { value: nuevaDefensa } = await Swal.fire({
-      title: `Configurar defensa para Player ${jugador.idPlayer}`,
-      input: 'number',
-      inputLabel: 'Nuevo valor de defensa',
-      inputValue: jugador.defensa,
-      showCancelButton: true
-    });
-    if (nuevaDefensa !== undefined) {
-      jugador.defensa = +nuevaDefensa;
-      console.log(`🛡️ Player ${jugador.idPlayer} ahora tiene defensa: ${jugador.defensa}`);
-      Swal.fire({
-        icon: 'success',
-        title: 'Defensa actualizada',
-        text: `Player ${jugador.idPlayer} ahora tiene defensa ${jugador.defensa}`,
-        timer: 2000,
-        showConfirmButton: false
-      });
-    }
-  };
-  
-  async PersonalizarSalud() {
-    if (!this.lectorJugadores()) return;
-    const jugador = await this.seleccionarJugador(
-      undefined, // no aplicamos filtro, todos los jugadores son válidos
-      p => `Player ${p.idPlayer} (⚔️ ${p.ataque})` // etiqueta personalizada
-    );
-    if (!jugador) return;
-    const { value: nuevaVida } = await Swal.fire({
-      title: `Configurar salud para Player ${jugador.idPlayer}`,
-      input: 'number',
-      inputLabel: 'Nuevo valor de salud',
-      inputValue: jugador.vida,
-      showCancelButton: true
-    });
-    if (nuevaVida !== undefined) {
-      jugador.vida = +nuevaVida;
-      console.log(`❤️ Player ${jugador.idPlayer} ahora tiene salud: ${jugador.vida}`);
-      Swal.fire({
-        icon: 'success',
-        title: 'Salud actualizada',
-        text: `Player ${jugador.idPlayer} ahora tiene salud ${jugador.vida}`,
-        timer: 2000,
-        showConfirmButton: false
-      });
-    }
-  };
-
-  // Acciones del jugador
+// Acciones del jugador
   async atacar(atacanteId: number) {
     const atacante = this.listPlayers.find(p => p.idPlayer === +atacanteId);
     if (!atacante) return;
@@ -220,12 +177,12 @@ export class GameComponent {
     }
   };
 
-  // Opciones de juego
+// Opciones de juego
   listaKills: any[] = [];
 
   registrarKill(atacanteId: number, objetivoId: number) {
     this.listaKills.push({ atacanteId, objetivoId, fecha: new Date() });
-  }
+  };
 
   Ranking() {
     const conteoKills: Record<number, number> = {}; // Contar kills por jugador
@@ -259,7 +216,7 @@ export class GameComponent {
     });
 
     return ranking;
-  }
+  };
 
   async Historialkills() {
     // 1️⃣ Armar lista de jugadores vivos y muertos (atacantes/objetivos en listaKills + vivos en listPlayers)
@@ -280,7 +237,6 @@ export class GameComponent {
       });
       return;
     }
-
     // 2️⃣ Seleccionar jugador (vivo o muerto)
     const { value: idSeleccionado } = await Swal.fire({
       title: "Selecciona un jugador",
@@ -295,12 +251,9 @@ export class GameComponent {
       inputPlaceholder: "Elige un jugador",
       showCancelButton: true
     });
-
     if (!idSeleccionado) return;
-
     // 3️⃣ Buscar historial de kills
     const kills = this.listaKills.filter(k => k.atacanteId === +idSeleccionado);
-
     if (kills.length === 0) {
       Swal.fire({
         title: `Historial de Player ${idSeleccionado}`,
@@ -309,11 +262,9 @@ export class GameComponent {
       });
       return;
     }
-
     const historialHtml = kills.map(k =>
       `⚔️ Mató a Player ${k.objetivoId} (${k.fecha.toLocaleTimeString()})`
     ).join("<br>");
-
     // 4️⃣ Mostrar historial
     Swal.fire({
       title: `Historial de Kills - Player ${idSeleccionado}`,
@@ -322,7 +273,7 @@ export class GameComponent {
     });
   };
 
-  // Factorizar
+// Factorizar
   lectorJugadores(): boolean {
     if (this.listPlayers.length === 0) {
       Swal.fire({
@@ -330,9 +281,9 @@ export class GameComponent {
         title: 'No hay jugadores',
         text: 'Agrega jugadores antes de personalizar salud.',
       });
-      return false; // 🔴 importante
+      return false; 
     }
-    return true; // ✅ hay jugadores
+    return true; 
   };
 
   async seleccionarJugador(filtro?: (p: any) => boolean, label?: (p: any) => string) {

@@ -41,6 +41,7 @@ export class GameComponent {
       const nuevo = {
         idPlayer: this.lastId,
         vida: 200,
+        vidaMax: 200,
         ataque: 100,
         defensa: 100,
       };
@@ -85,12 +86,13 @@ export class GameComponent {
     }
   }; 
 
-  async personalizarAtributo(tipo: 'ataque' | 'defensa' | 'vida') {
+  async personalizarAtributo(tipo: 'ataque' | 'defensa' | 'vida' | 'vidaMax') {
     if (!this.lectorJugadores()) return;
     const config = {
       ataque: { icono: '⚔️', label: 'ataque' },
       defensa: { icono: '🛡️', label: 'defensa' },
-      vida:   { icono: '❤️', label: 'salud' }
+      vidaMax:{ icono: '💖', label: 'vidaMax' },
+      vida:   { icono: '❤️', label: 'salud' },
     }[tipo];
     // Seleccionar jugador
     const jugador = await this.seleccionarJugador(
@@ -172,7 +174,7 @@ export class GameComponent {
   curar(id: number) {
     const jugador = this.listPlayers.find(p => p.idPlayer === id);
     if (jugador) {
-      jugador.vida = Math.min(jugador.vida + 100, 500); // máximo 500 de vida
+      jugador.vida = Math.min(jugador.vida + 100, jugador.vidaMax); // máximo de vida del jugador
       console.log(`Player ${id} se curó. Vida actual: ${jugador.vida}`);
     }
   };

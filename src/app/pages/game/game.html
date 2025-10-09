@@ -34,6 +34,7 @@
       🧑‍🤝‍🧑 Personalización jugador
     </div>
     <div class="menu-content" [class.open]="menus.personalizar">
+      <button (click)="personalizarAtributo('vidaMax')">💖 Personalizar salud maxima</button>
       <button (click)="personalizarAtributo('vida')">❤️ Personalizar salud</button>
       <button (click)="personalizarAtributo('ataque')">⚔️ Personalizar ataque</button>
       <button (click)="personalizarAtributo('defensa')">🛡️ Personalizar defensa</button>
@@ -47,7 +48,7 @@
       <h2>🧑 Player {{ player.idPlayer }}</h2>
       
       <div class="stats">
-        <p>❤️ Vida: <span>{{ player.vida }}/200</span></p>
+        <p>❤️ Vida: <span>{{ player.vida }}/{{ player.vidaMax }}</span></p>
         <p>⚔️ Ataque: <span>{{ player.ataque }}</span></p>
         <p>🛡️ Defensa: <span>{{ player.defensa }}</span></p>
       </div>

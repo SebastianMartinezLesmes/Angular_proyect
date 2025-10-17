@@ -1,0 +1,31 @@
+<header class="app-header">
+    <h1>Welcome to Angular 20 App</h1>
+    <nav>
+      @for (item of listRoutes; track $index) {
+        <button (click)="routerTo(item.path)">{{ item.label }}</button>
+      }
+    </nav>
+</header>
+
+<div class="testing-container">
+  <h2>Tomar foto</h2>
+
+  <div class="buttons">
+    <button (click)="openCamera()">Abrir cámara</button>
+    <button (click)="capturePhoto()">Capturar foto</button>
+    <button (click)="closeCamera()">Cerrar cámara</button>
+  </div>
+
+  @if (photo) {
+    <div>
+        <video autoplay></video>
+    </div>
+  }
+  @if (photo) {
+    <div class="photo-container">
+        <h3>Vista previa:</h3>
+        <img [src]="photo" alt="Foto tomada" />
+    </div>
+  }
+</div>
+

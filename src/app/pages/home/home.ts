@@ -17,6 +17,7 @@ export class HomeComponent {
     { label: 'Time Line', path: '/time_line' },
     { label: 'Estadisctics', path: '/estadistic' },
     { label: 'Gaming POO', path: '/game' },
+    { label: 'testing', path: '/test' },
     { label: 'Logout', path: '/login' },
   ];
 
@@ -27,7 +28,9 @@ export class HomeComponent {
   routerTo(path: string) {
     this.router.navigate([path]);
   }
-
+  
+  countHellow = 0
+  
   hellow(){
     const storedUser = localStorage.getItem('loggedUser');
     if (storedUser) {
@@ -51,7 +54,7 @@ export class HomeComponent {
         `
       });
     }
-  }
+  };
 
   window() {
     const storedUser = localStorage.getItem('loggedUser');

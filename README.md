@@ -40,6 +40,9 @@ Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
    ```bash
    ng serve
    ```
+   ```bash
+   npm start
+   ```
 ---
 
 ## Comandos útiles
@@ -51,6 +54,9 @@ Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas:
 - Crear un nuevo componente:
   ```bash
   ng generate component nombre-del-componente
+  ```
+  ```bash
+  ng g c nombre-del-componente
   ```
 - Ejecutar tests:
   ```bash

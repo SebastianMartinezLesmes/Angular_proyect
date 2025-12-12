@@ -1,0 +1,41 @@
+<main class="home-container">
+  <header class="app-header">
+    <div class="header-left">
+      <h1>Angular 20</h1>
+      <span class="tagline">Modern Web Framework</span>
+    </div>
+
+    <nav class="header-nav">
+      <button class="logout-btn" (click)="routerTo('login')">Logout</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Building Modern Web Apps</h2>
+    <p>
+      Experience fast and reactive web development with Angular 20.
+      Explore features, learn components, and enjoy responsive design!
+    </p>
+    <button (click)="window()">Who I’m?</button>
+  </section>
+
+  <div id="cards">
+    @for (item of listRoutes; track $index) {
+      @if ($index < listRoutes.length - 1) {
+        <div class="card" (click)="routerTo(item.path)">
+          <h3>{{ item.label }}</h3>
+          <p>Explora el módulo {{ item.label }}</p>
+        </div>
+      }
+    }
+  </div>
+
+  <footer class="app-footer">
+    <p>© 2025 Angular 20 App | Built with ❤️ using Angular</p>
+    <div class="socials">
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </footer>
+
+</main>

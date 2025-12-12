@@ -1,0 +1,92 @@
+[
+  {
+    "titulo": "Declaración de Independencia de EE.UU.",
+    "fecha": "1776-07-04",
+    "descripcion": "Las Trece Colonias proclamaron su independencia del Imperio Británico."
+  },
+  {
+    "titulo": "Revolución Francesa",
+    "fecha": "1789-07-14",
+    "descripcion": "Toma de la Bastilla en París, evento clave que marcó el inicio de la Revolución Francesa."
+  },
+  {
+    "titulo": "Primera Guerra Mundial",
+    "fecha": "1914-07-28",
+    "descripcion": "Comienzo de la Gran Guerra tras el asesinato del archiduque Francisco Fernando."
+  },
+  {
+    "titulo": "Segunda Guerra Mundial",
+    "fecha": "1939-09-01",
+    "descripcion": "Alemania invade Polonia, dando inicio al conflicto más grande de la historia moderna."
+  },
+  {
+    "titulo": "Llegada del hombre a la Luna",
+    "fecha": "1969-07-20",
+    "descripcion": "La misión Apollo 11 logra que Neil Armstrong sea el primer ser humano en pisar la Luna."
+  },
+  {
+    "titulo": "Caída del Muro de Berlín",
+    "fecha": "1989-11-09",
+    "descripcion": "La frontera que dividía a Alemania Oriental y Occidental fue derribada, símbolo del fin de la Guerra Fría."
+  },
+  {
+    "titulo": "Atentados del 11 de septiembre",
+    "fecha": "2001-09-11",
+    "descripcion": "Ataques terroristas en Nueva York y Washington que marcaron un cambio en la política mundial."
+  },
+  {
+    "titulo": "Pandemia de COVID-19",
+    "fecha": "2020-03-11",
+    "descripcion": "La OMS declara pandemia mundial por el nuevo coronavirus, afectando a todo el planeta."
+  },
+  {
+    "titulo": "Invención de la imprenta",
+    "fecha": "1440-01-01",
+    "descripcion": "Johannes Gutenberg inventa la imprenta de tipos móviles, revolucionando la difusión del conocimiento."
+  },
+  {
+    "titulo": "Descubrimiento de América",
+    "fecha": "1492-10-12",
+    "descripcion": "Cristóbal Colón llega a tierras americanas bajo el patrocinio de los Reyes Católicos de España."
+  },
+  {
+    "titulo": "Independencia de Colombia",
+    "fecha": "1810-07-20",
+    "descripcion": "Se da el grito de independencia en Bogotá, un hecho clave en la emancipación de Colombia del dominio español."
+  },
+  {
+    "titulo": "Abolición de la esclavitud en EE.UU.",
+    "fecha": "1865-12-06",
+    "descripcion": "La Decimotercera Enmienda a la Constitución de Estados Unidos prohíbe oficialmente la esclavitud."
+  },
+  {
+    "titulo": "Invención del teléfono",
+    "fecha": "1876-03-07",
+    "descripcion": "Alexander Graham Bell patenta el teléfono, transformando las comunicaciones para siempre."
+  },
+  {
+    "titulo": "Primera transmisión de radio",
+    "fecha": "1895-12-24",
+    "descripcion": "Guglielmo Marconi logra la primera transmisión inalámbrica, iniciando la era de la radio."
+  },
+  {
+    "titulo": "Creación de la ONU",
+    "fecha": "1945-10-24",
+    "descripcion": "Se funda la Organización de las Naciones Unidas con el objetivo de mantener la paz y la cooperación internacional."
+  },
+  {
+    "titulo": "Nacimiento de Internet",
+    "fecha": "1983-01-01",
+    "descripcion": "Se implementa oficialmente el protocolo TCP/IP, marcando el inicio de lo que hoy conocemos como Internet."
+  },
+  {
+    "titulo": "Elección de Barack Obama",
+    "fecha": "2008-11-04",
+    "descripcion": "Barack Obama es elegido como el primer presidente afroamericano de Estados Unidos."
+  },
+  {
+    "titulo": "Misión Perseverance en Marte",
+    "fecha": "2021-02-18",
+    "descripcion": "El rover Perseverance de la NASA aterriza en Marte para explorar el planeta rojo y buscar signos de vida pasada."
+  }
+]

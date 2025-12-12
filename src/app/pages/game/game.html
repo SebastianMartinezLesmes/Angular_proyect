@@ -1,0 +1,55 @@
+<header class="app-header">
+  <h1>GAME POO</h1>
+  <nav>
+    @for (item of listRoutes; track $index) {
+      <button (click)="routerTo(item.path)">{{ item.label }}</button>
+    }
+  </nav>
+</header>
+
+<div class="controls">
+  <div class="menu">
+    <div class="menu-header" (click)="toggleMenu('juego')">
+      🎮 Opciones de juego
+    </div>
+    <div class="menu-content" [class.open]="menus.juego">
+      <button (click)="Ranking()">Ranking</button>
+      <button (click)="Historialkills()">Historial de batallas</button>
+    </div>
+  </div>
+  
+  <div class="menu">
+    <div class="menu-header" (click)="toggleMenu('jugadores')">
+      🧑‍🤝‍🧑 Gestión de jugadores
+    </div>
+    <div class="menu-content" [class.open]="menus.jugadores">
+      <button (click)="nuevoPlayer()">Nuevo jugador</button>
+      <button (click)="personalizarAtributo()">personalizar atributos jugador</button>
+      <button (click)="eliminarJugador()">Eliminar jugador</button>
+      <button (click)="eliminarJugadores()">Eliminar jugadores</button>
+    </div>
+  </div>
+</div>
+
+<main class="battle-container">
+  @for (player of listPlayers; track $index) {
+    <section class="combatant player">
+      <h2>🧑 Player {{ player.idPlayer }}</h2>
+      
+      <div class="stats">
+        <p>❤️ Vida: <span>{{ player.vida }}/{{ player.vidaMax }}</span></p>
+        <p>⚔️ Ataque: <span>{{ player.ataque }}</span></p>
+        <p>🛡️ Defensa: <span>{{ player.defensa }}</span></p>
+      </div>
+
+      <div class="actions">
+        <!-- Curar -->
+        <button class="heal-btn" (click)="curar(player.idPlayer)">💊 Curar</button>
+
+        <!-- Atacar -->
+        <button class="attack-btn" (click)="atacar(player.idPlayer)">⚔️ Atacar</button>
+
+      </div>
+    </section>
+  }
+</main>

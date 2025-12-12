@@ -1,0 +1,113 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100vh;
+  width: 100%;
+  position: relative; // necesario para las olas
+  overflow: hidden;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  font-family: Arial, sans-serif;
+
+  /* Olas animadas */
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 500%;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 100% 50%;
+    animation: wave 8s linear infinite;
+  }
+
+  &::after {
+    background: rgba(255, 255, 255, 0.6);
+    animation: wave 12s linear infinite reverse;
+    bottom: -30px;
+  }
+
+  h1 {
+    color: #fff;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    display: inline-block;
+    transition: transform 0.8s ease;
+
+    &:active {
+      transform: rotate(360deg);
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 2rem;
+    background: #ffffffdd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 2; // mantener el formulario por encima de las olas
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+
+      label {
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #333;
+      }
+
+      input {
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+
+        &:focus {
+          outline: none;
+          border-color: #4facfe;
+          box-shadow: 0 0 5px #4facfe;
+        }
+      }
+    }
+
+    button {
+      padding: 0.7rem;
+      background-color: #4facfe;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #00f2fe;
+      }
+    }
+  }
+}
+
+/* Animación de olas */
+@keyframes wave {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Animaciones adicionales */
+@keyframes fadeSlideDown {
+  0% { opacity: 0; transform: translateY(-50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideUp {
+  0% { opacity: 0; transform: translateY(50px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
